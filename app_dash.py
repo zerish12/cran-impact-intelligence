@@ -270,3 +270,65 @@ with export_tab:
 
 st.divider()
 st.caption("Independent research software portfolio · Source: CRANlogs daily published statistics · Not an official CRAN analytics service · Updated application: app_dash.py")
+
+# ==========================================================
+# PACKAGE INSTALLATION AND DOCUMENTATION
+# ==========================================================
+
+st.markdown("---")
+st.subheader("📦 Download and Install R Packages")
+
+st.caption(
+    "Install packages directly in R, visit their CRAN pages, "
+    "or access the available source code."
+)
+
+cran_packages = [
+    "VOWR",
+    "nhscancerwaits",
+    "bewrs",
+    "CRBHSF",
+]
+
+github_packages = {
+    "AdaptiveTrialsR": "zerish12/AdaptiveTrialsR",
+    "BayesSurveillance": "zerish12/BayesSurveillance",
+}
+
+for package in cran_packages:
+    with st.expander(f"📦 {package}", expanded=False):
+        st.code(
+            f'install.packages("{package}")',
+            language="r"
+        )
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.link_button(
+                "📥 CRAN Download",
+                f"https://cran.r-project.org/package={package}",
+                use_container_width=True
+            )
+
+        with col2:
+            st.link_button(
+                "📖 Documentation",
+                f"https://cran.r-project.org/web/packages/"
+                f"{package}/{package}.pdf",
+                use_container_width=True
+            )
+
+for package, repo in github_packages.items():
+    with st.expander(f"📦 {package} (GitHub)", expanded=False):
+        st.code(
+            f'remotes::install_github("{repo}")',
+            language="r"
+        )
+
+        st.link_button(
+            "💻 View GitHub Repository",
+            f"https://github.com/{repo}",
+            use_container_width=True
+        )
+
